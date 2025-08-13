@@ -1,0 +1,3 @@
+php artisan make:controller AutheController
+
+Route::get('/',AutheController::class)

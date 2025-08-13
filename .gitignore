@@ -1,0 +1,54 @@
+# =========================
+# Laravel / PHP
+# =========================
+**/vendor/
+**/node_modules/
+
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+
+# PHPunit cache
+**/.phpunit.cache
+**/.phpunit.result.cache
+
+# Storage and cache
+**/storage/*.key
+**/storage/framework/cache/*
+**/storage/framework/sessions/*
+**/storage/framework/views/*
+**/storage/logs/*
+**/storage/pail/*
+
+# Public storage & build
+**/public/storage
+**/public/build
+**/public/hot
+
+# Composer lock file (optional to ignore, but often kept in repos)
+# composer.lock
+
+# NPM / Yarn debug logs
+**/npm-debug.log
+**/yarn-error.log
+
+# Homestead / Valet / Sail
+**/Homestead.json
+**/Homestead.yaml
+**/.vagrant
+**/.valet
+
+# IDEs / Editors
+**/.idea
+**/.vscode
+**/.fleet
+**/.nova
+**/.zed
+**/.phpactor.json
+
+# Authentication config
+**/auth.json
+
+# Misc
+**/RAPPORT*.pdf
