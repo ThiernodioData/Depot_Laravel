@@ -1,0 +1,69 @@
+// Platforme de gestion complète des étudiants pour une université
+// Auteur : Thierno Idrissa Diallo
+// Date : 2025-02-28
+// Description : Modèle de données pour la gestion des étudiants, des utilisateurs, des notes et des évaluations
+// Email : diallothiernoidrissa352@gmail.com
+// Version : 1.1.0
+
+Table Utilisateurs {
+    id INT [pk, increment, note: "Identifiant unique"]
+    nom VARCHAR(100) [not null, note: "Nom complet de l'utilisateur"]
+    photo VARCHAR [note: "Chemin de la photo de profil"]
+    email VARCHAR(100) [unique, not null, note: "Adresse email unique pour la connexion"]
+    password VARCHAR(255) [not null, note: "Mot de passe sécurisé"]
+    role ENUM('Admin', 'Utilisateur') [not null, default: 'Utilisateur', note: "Rôle de l'utilisateur dans le système"]
+    etat INT [not null, default: 1, note: "Statut de l'utilisateur"]
+    created_at DATETIME [not null, default: `CURRENT_TIMESTAMP`, note: "Date de création de l'utilisateur"]
+    updated_at DATETIME [default: `CURRENT_TIMESTAMP` on update CURRENT_TIMESTAMP, note: "Date de la dernière mise à jour"]
+    deleted_at DATETIME [default: null, note: "Date de suppression logique"]
+    created_by VARCHAR(255) [not null, note: "Créateur de l'enregistrement"]
+    updated_by VARCHAR(255) [default: null, note: "Dernier modificateur"]
+    deleted_by VARCHAR(255) [default: null, note: "Responsable de la suppression"]
+}
+
+Table Etudiants {
+    id INT [pk, increment, note: "Identifiant unique"]
+    nom VARCHAR(100) [not null, note: "Nom complet de l'étudiant"]
+    photo VARCHAR [note: "Chemin de la photo de profil"]
+    email VARCHAR(100) [unique, not null, note: "Adresse email unique"]
+    password VARCHAR(255) [not null, note: "Mot de passe sécurisé"]
+    matricule VARCHAR(50) [unique, not null, note: "Numéro matricule unique"]
+    adresse TEXT [note: "Adresse complète"]
+    etat INT [not null, default: 1, note: "Statut de l'étudiant"]
+    created_at DATETIME [not null, default: `CURRENT_TIMESTAMP`, note: "Date de création de l'enregistrement"]
+    updated_at DATETIME [default: `CURRENT_TIMESTAMP` on update CURRENT_TIMESTAMP, note: "Date de la dernière mise à jour"]
+    deleted_at DATETIME [default: null, note: "Date de suppression logique"]
+    created_by VARCHAR(255) [not null, note: "Créateur de l'enregistrement"]
+    updated_by VARCHAR(255) [default: null, note: "Dernier modificateur"]
+    deleted_by VARCHAR(255) [default: null, note: "Responsable de la suppression"]
+    id_utilisateur INT [ref: > Utilisateurs.id, not null, note: "Administrateur ayant créé cet étudiant"]
+}
+
+Table Notes {
+    id INT [pk, increment, note: "Identifiant unique"]
+    note DECIMAL(5,2) [not null, note: "Valeur de la note (ex: 18.50)"]
+    id_etudiant INT [ref: > Etudiants.id, not null, note: "Référence vers l'étudiant"]
+    id_evaluation INT [ref: > Evaluations.id, not null, note: "Référence vers l'évaluation"]
+    etat INT [not null, default: 1, note: "Statut de la note"]
+    created_at DATETIME [not null, default: `CURRENT_TIMESTAMP`, note: "Date de création de la note"]
+    updated_at DATETIME [default: `CURRENT_TIMESTAMP` on update CURRENT_TIMESTAMP, note: "Date de la dernière mise à jour"]
+    deleted_at DATETIME [default: null, note: "Date de suppression logique"]
+    created_by VARCHAR(255) [not null, note: "Créateur de l'enregistrement"]
+    updated_by VARCHAR(255) [default: null, note: "Dernier modificateur"]
+    deleted_by VARCHAR(255) [default: null, note: "Responsable de la suppression"]
+}
+
+Table Evaluations {
+    id INT [pk, increment, note: "Identifiant unique"]
+    nom VARCHAR(100) [not null, note: "Nom de l'évaluation (ex: Examen final, Contrôle continu)"]
+    type ENUM('Examen', 'Test', 'Projet', 'Autre') [not null, note: "Type d'évaluation"]
+    semestre ENUM('Semestre 1', 'Semestre 2', 'Semestre 3', 'Semestre 4') [not null, note: "Semestre correspondant"]
+    description TEXT [note: "Description détaillée de l'évaluation"]
+    etat INT [not null, default: 1, note: "Statut de l'évaluation"]
+    created_at DATETIME [not null, default: `CURRENT_TIMESTAMP`, note: "Date de création de l'évaluation"]
+    updated_at DATETIME [default: `CURRENT_TIMESTAMP` on update CURRENT_TIMESTAMP, note: "Date de la dernière mise à jour"]
+    deleted_at DATETIME [default: null, note: "Date de suppression logique"]
+    created_by VARCHAR(255) [not null, note: "Créateur de l'enregistrement"]
+    updated_by VARCHAR(255) [default: null, note: "Dernier modificateur"]
+    deleted_by VARCHAR(255) [default: null, note: "Responsable de la suppression"]
+}

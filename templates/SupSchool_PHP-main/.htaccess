@@ -1,0 +1,22 @@
+ReWriteEngine On
+
+#--------- Routes globales-------------
+ReWriteRule ^login$ login.php
+ReWriteRule ^admin$ admin.php
+ReWriteRule ^home$ index.php
+
+#--------- Routes View-----------------
+ReWriteRule ^listeEtudiant$ view/pages/admin/etudiant/liste.php
+ReWriteRule ^listeEvaluation$ view/pages/admin/evaluation/liste.php
+ReWriteRule ^listeUser$ view/pages/admin/user/liste.php
+ReWriteRule ^listeNote$ view/pages/admin/note/liste.php 
+ 
+
+#--------- Routes Controller-----------
+ReWriteRule ^userMainController$ controller/user/UserMainController.php
+ReWriteRule ^etudiantMainController$ controller/etudiant/EtudiantMainController.php
+ReWriteRule ^evaluationMainController$ controller/evaluation/EvaluationMainController.php
+ReWriteRule ^noteMainController$ controller/note/NoteMainController.php
+
+#--------- Routes Modeel---------------
+
